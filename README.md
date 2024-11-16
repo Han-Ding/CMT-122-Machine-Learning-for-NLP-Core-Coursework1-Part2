@@ -285,7 +285,14 @@ plt.show()
 
 **_Note: Same function as Part1 and will not go into too much detail._**
 
+---
 
+## **_Conclusion:_**
+
+**_Compared to Part1, Part2 explores more about how text data with multiple feature values should be processed. Starting from the eigenvalue division, the linear regression model is no longer applicable, 
+so choose a classification model that performs better. After that, the text is divided into three, training set, test set and development set is to better adapt the model to new data and avoid overfitting phenomenon. 
+At the same time, the phenomenon of multiple feature values will also need to increase the number of iterations is the model to reach the optimal solution. There are still deficiencies in the code and the need to modify, 
+but also need to continue to learn._**
 
 
 
