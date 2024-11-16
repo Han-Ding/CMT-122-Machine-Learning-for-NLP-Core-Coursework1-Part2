@@ -22,8 +22,8 @@ perform feature selection to reduce the dimensionality of all the features.**
  - Feature 3: Length features of articles.
  - Feature 4: Average length of words.
  - Feature 5: Number of special symbols.
- 5. Feature Selection: Select the best 2000 features using chi-square test to reduce the number of features and prevent overfitting.
- 6. Dataset Splitting: Split the dataset into a training set and a test set, with the test set accounting for 20%.
+ 5. Feature Selection: Select the best features using chi-square test to reduce the number of features and prevent overfitting.
+ 6. Dataset Splitting: Split the dataset into a training set, a test set adn a development set, with the test set accounting for 15%.
  7. Train the logistic regression model and make predictions on the test set.
  8. Evaluate model performance: evaluate the model using classification reports and confusion matrices, and check the stability of the model using cross-validation.
 
