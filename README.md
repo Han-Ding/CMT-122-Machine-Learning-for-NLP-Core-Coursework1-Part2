@@ -275,6 +275,8 @@ print(classification_report(y_test, y_pred, target_names=label_encoder.classes_)
 ---
 
 ## _**Seventh Step: Print Confusion Matrix**._
+
+```
 conf_matrix = confusion_matrix(y_test, y_pred)
 plt.figure(figsize=(10, 7))
 sns.heatmap(conf_matrix, annot=True, cmap='Blues', fmt='g', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
@@ -282,6 +284,7 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Confusion Matrix')
 plt.show()
+```
 
 **_Note: Same function as Part1 and will not go into too much detail._**
 
