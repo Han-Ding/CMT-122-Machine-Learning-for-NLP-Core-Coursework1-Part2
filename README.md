@@ -297,15 +297,15 @@ so choose a classification model that performs better. After that, the text is d
 At the same time, the phenomenon of multiple feature values will also need to increase the number of iterations is the model to reach the optimal solution. There are still deficiencies in the code and the need to modify, 
 but also need to continue to learn._**
 
+## **_Critical Reflection:_**
 
+**_1. In terms of model selection, I just used a classification model based on logistic regression, but I'm not sure if it's optimal or not, there are other more sophisticated models, for example,
+I've used a plain Bayesian model before to process text with over 4w data for sentiment analysis. But the accuracy was only about 85%, so I think it might be the amount of data that makes this not-so-accurate model as accurate as 95%._**
 
+**_2.In the model i just set some parameters manually like c=0.1, max_iter=7000, etc. These parameters are not always the most suitable, so I think I should let the machine simulate the exercise itself to find out the most suitable parameters._**
 
-
-
-
-
-
-
+**_3.This model also does not do a good job of dealing with the context of the text, such as contextual scenarios and the like.
+And the data according to the source is slightly single, which also affects the accuracy of the model._**
 
 
 
