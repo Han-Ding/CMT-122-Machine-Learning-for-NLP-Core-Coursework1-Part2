@@ -1,5 +1,5 @@
 ## _**Goal**_
-**In Part 2, you are provided with a text classification dataset (named “bbc_text”). The 
+**In Part 2, you are provided with a text classification dataset (named “bbc-text”). The 
 dataset contains news articles assigned to five categories: tech, business, sport, politics 
 and entertainment. Using this dataset, you need to preprocess the data, select features, 
 train and evaluate a machine learning model of your choice to classify the news articles. 
