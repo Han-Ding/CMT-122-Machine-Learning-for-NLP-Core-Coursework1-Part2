@@ -131,6 +131,49 @@ X_tfidf = tfidf_vectorizer.fit_transform(X_processed)
 It is fitting and transforming the dataset X_processed, calculating the TF-IDF weights and converting the text into a TF-IDF feature matrix.
 Only 5000 features will be retained in the end (you can change this yourself, try to keep it modest, not too small and not too much)._**
 
+**_In addition to calling python library functions, it is also possible to calculate TF-IDF manually.<If the computer performance is not so good it is recommended to make a function call, it will be much faster than manual calculation. 
+Here is just as a demonstration of the TF-IDF calculation method, interested parties can also learn more about it. The following bag-of-words model calculation is also the same.>_**
+
+```
+def custom_tfidf(corpus, max_features=5000):
+    word_counts = [Counter(text.split()) for text in corpus]
+    N = len(corpus)
+    df = Counter()
+
+    for wc in word_counts:
+        for word in wc:
+            df[word] += 1
+
+    idf = {word: np.log(N / (df[word] + 1)) for word in df}
+    tfidf_vectors = []
+
+    for doc in word_counts:
+        tfidf = {}
+        for word, count in doc.items():
+            tf = count / len(doc)
+            tfidf[word] = tf * idf[word]
+        tfidf_vectors.append(tfidf)
+        
+    vocabulary = list(idf.keys())
+    vocabulary.sort()
+    
+    X_tfidf = np.zeros((len(corpus), len(vocabulary)))
+    for i, tfidf in enumerate(tfidf_vectors):
+        for word, value in tfidf.items():
+            if word in vocabulary:
+                X_tfidf[i, vocabulary.index(word)] = value
+    
+    if max_features is not None:
+        feature_sums = X_tfidf.sum(axis=0)
+        sorted_idx = feature_sums.argsort()[::-1][:max_features]
+        X_tfidf = X_tfidf[:, sorted_idx]
+        vocabulary = [vocabulary[i] for i in sorted_idx]
+    
+    return X_tfidf, vocabulary
+
+X_tfidf, tfidf_vocab = custom_tfidf(X_processed.values.tolist(), max_features=5000)
+```
+
 **Average: Effective capture is possible for common words**
 
 **Neg: Then the drawbacks are obvious, the diversity of words in this method is not sensitive, because it does not capture the context**
@@ -147,6 +190,32 @@ X_count = count_vectorizer.fit_transform(X_processed)
 **Note: _The basic idea of the bag-of-words model is to ignore the word order and grammatical structure of the text and instead simply count the number of times each word appears in the text.
 Words are first extracted from all the text and a unique index is assigned to each word. For each document, the number of occurrences of each word in the vocabulary is counted and represented as a feature vector. 
 This simply means processing the text data into machine understandable numerical data._**
+
+**_Similarly bag-of-words models can be computed manually._**
+
+```
+def custom_bow(corpus, max_features=5000):
+    word_counts = [Counter(text.split()) for text in corpus]
+    
+    vocabulary = list(set([word for wc in word_counts for word in wc]))
+    vocabulary.sort()
+    
+    X_count = np.zeros((len(corpus), len(vocabulary)))
+    for i, wc in enumerate(word_counts):
+        for word, count in wc.items():
+            if word in vocabulary:
+                X_count[i, vocabulary.index(word)] = count
+    
+    if max_features is not None:
+        feature_sums = X_count.sum(axis=0)
+        sorted_idx = feature_sums.argsort()[::-1][:max_features]
+        X_count = X_count[:, sorted_idx]
+        vocabulary = [vocabulary[i] for i in sorted_idx]
+    
+    return X_count, vocabulary
+
+X_count, bow_vocab = custom_bow(X_processed.values.tolist(), max_features=5000)
+```
 
 **Average: No complex mathematical calculations are required. By counting word frequencies, the text can be converted into numerical vectors.**
 
