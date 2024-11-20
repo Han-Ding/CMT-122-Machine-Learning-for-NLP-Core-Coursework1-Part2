@@ -403,6 +403,7 @@ I've used a plain Bayesian model before to process text with over 4w data for se
 **_3.This model also does not do a good job of dealing with the context of the text, such as contextual scenarios and the like.
 And the data according to the source is slightly single, which also affects the accuracy of the model._**
 
-
+**_4.Also the source of the data is limited, just coming from the region of the feature, language or social media can make the model perform poorly when faced with new data.
+There is not enough refinement in processing the text, and the data preprocessing steps should be further refined, such as processing synonyms and lexical labelling, in order to obtain better performance at the semantic level._**
 
 
