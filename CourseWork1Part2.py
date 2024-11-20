@@ -192,7 +192,7 @@ print(classification_report(y_test, y_pred, target_names=label_encoder.classes_)
 cv_scores = cross_val_score(classifier, X_selected, y, cv=5)
 print(f"Average accuracy of cross-validation: {np.mean(cv_scores)}")
 
-# Confusion matrix (math.)
+# Confusion matrix
 conf_matrix = confusion_matrix(y_test, y_pred)
 plt.figure(figsize=(10, 7))
 sns.heatmap(conf_matrix, annot=True, cmap='Reds', fmt='g', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
@@ -208,7 +208,7 @@ svm_classifier.fit(X_train, y_train)
 # Prediction using SVM
 y_pred_svm = svm_classifier.predict(X_test)
 
-# Evaluation
+# Confusion matrix
 print("SVM Classification Report:")
 print(classification_report(y_test, y_pred_svm, target_names=label_encoder.classes_))
 conf_matrix_svm = confusion_matrix(y_test, y_pred_svm)
