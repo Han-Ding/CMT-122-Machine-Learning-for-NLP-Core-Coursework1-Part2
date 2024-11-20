@@ -24,8 +24,12 @@ perform feature selection to reduce the dimensionality of all the features.**
  - Feature 5: Number of special symbols.
  5. Feature Selection: Select the best features using chi-square test to reduce the number of features and prevent overfitting.
  6. Dataset Splitting: Split the dataset into a training set, a test set adn a development set, with the test set accounting for 15%.
- 7. Train the logistic regression model and make predictions on the test set.
+ 7. Train the logistic regression model and SVM model then make predictions on the test set.
  8. Evaluate model performance: evaluate the model using classification reports and confusion matrices, and check the stability of the model using cross-validation.
+
+---
+
+# **Note: _To use this code, simply change the absolute path to the file bbc-text.csv._**
 
 ---
 
@@ -253,7 +257,7 @@ which improves the generalisation ability of the model and also prevents overfit
 The division is done by dividing the raw text into training set and others in the ratio of 7:3 and then dividing the others into development set and test set in the ratio of 1:1.
 The final ratio of training set, development set and test set is 70%,15%,15%._**
 
-- **Training logistic regression models**
+- **Training logistic regression models and SVM Model**
 
 ```
 classifier = LogisticRegression(solver='saga', max_iter=7000, C=0.1)
@@ -272,6 +276,17 @@ print(classification_report(y_test, y_pred, target_names=label_encoder.classes_)
 
 **_Note: In contrast to Part1, a lazy library is used here, classification_report(), whose role is to be used specifically to generate a detailed report on Precision, Recall, F1-Scocre and Support._**
 
+- **SVM model training**
+
+```
+svm_classifier = SVC(kernel='linear',max_iter=7000, C=1.0)
+svm_classifier.fit(X_train, y_train)
+y_pred_svm = svm_classifier.predict(X_test)
+print("SVM Classification Report:")
+print(classification_report(y_test, y_pred_svm, target_names=label_encoder.classes_))
+```
+**_Note: The binary SVM model added here is also a classification model and its purpose is to compare the training results of the two models._**
+
 ---
 
 ## _**Seventh Step: Print Confusion Matrix**._
@@ -279,14 +294,26 @@ print(classification_report(y_test, y_pred, target_names=label_encoder.classes_)
 ```
 conf_matrix = confusion_matrix(y_test, y_pred)
 plt.figure(figsize=(10, 7))
-sns.heatmap(conf_matrix, annot=True, cmap='Blues', fmt='g', x=label_encoder.classes_, y=label_encoder.classes_)
+sns.heatmap(conf_matrix, annot=True, cmap='Blues', fmt='g', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
 plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.title('Confusion Matrix')
 plt.show()
 ```
+```
+conf_matrix_svm = confusion_matrix(y_test, y_pred_svm)
+plt.figure(figsize=(10, 7))
+sns.heatmap(conf_matrix_svm, annot=True, cmap='Reds', fmt='g', xticklabels=label_encoder.classes_, yticklabels=label_encoder.classes_)
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('SVM Confusion Matrix')
+plt.show()
+```
 
 **_Note: Same function as Part1 and will not go into too much detail._**
+
+
+
 
 ---
 
